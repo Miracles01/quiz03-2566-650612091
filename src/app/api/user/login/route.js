@@ -8,7 +8,7 @@ export const POST = async (request) => {
   const user = DB.user.find(
     (user) => user.username === username && user.password
   );
-
+    if(!user)
   return NextResponse.json(
     {
       ok: false,
@@ -18,8 +18,12 @@ export const POST = async (request) => {
   );
 
   const token = jwt.sign({
-    username,
-  });
+    username,role:user.role
+  },
+   process.env.JWT_SECRET,
+   { expiresIn: "8h"});
+
+  const
 
   return NextResponse.json({ ok: true, token });
 };
