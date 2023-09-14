@@ -12,6 +12,7 @@ export const GET = async () => {
   });
 };
 
+
 export const POST = async (request) => {
   let role = null;
   try {
@@ -25,7 +26,8 @@ export const POST = async (request) => {
   }
   if (role !== "ADMIN" && role !== "SUPER_ADMIN")
     return NextResponse.json(
-      { ok: false, message: "Invalid token" },
+      { ok: false,
+       message: "Invalid token" },
       { status: 401 }
     );
 
@@ -35,7 +37,8 @@ export const POST = async (request) => {
   const foundIndex = DB.rooms.findIndex((room) => room.roomName == roomName);
   if (foundIndex >= 0)
     return NextResponse.json(
-      { ok: false, message: `Room ${roomName} already exists` },
+      { ok: false, 
+       message: `Room ${roomName} already exists` },
       { status: 400 }
     );
 
